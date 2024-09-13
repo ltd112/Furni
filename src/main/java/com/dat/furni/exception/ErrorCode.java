@@ -14,8 +14,8 @@ public enum ErrorCode {
     INTERNAL_SERVER_ERROR(500, "Internal server error"),
     UNCAUGHT_EXCEPTION(500, "Uncaught exception"),
     USERNAME_INVALID(400, "Username must be at least 5 characters long"),
-    PASSWORD_INVALID(400, "Password must be at least 8 characters long")
-
+    PASSWORD_INVALID(400, "Password must be at least 8 characters long"),
+    UNAUTHENTICATED(401, "Unauthenticated"),
     ;
 
     private final int code;
