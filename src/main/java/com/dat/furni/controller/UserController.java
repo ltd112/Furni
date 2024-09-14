@@ -48,6 +48,9 @@ public class UserController {
                 .result(userService.getMyInfo())
                 .build();
 
+
+
+
     }
 
     @PutMapping("/{userId}")
