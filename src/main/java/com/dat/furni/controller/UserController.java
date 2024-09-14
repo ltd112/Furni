@@ -47,6 +47,7 @@ public class UserController {
         return ApiResponse.<UserResponse>builder()
                 .result(userService.getMyInfo())
                 .build();
+
     }
 
     @PutMapping("/{userId}")
