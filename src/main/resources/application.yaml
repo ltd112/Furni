@@ -1,7 +1,7 @@
 server:
   port: 8080
   servlet:
-      context-path: /Furni
+    context-path: /furni
 spring:
   datasource:
     url: "jdbc:mysql://localhost:3308/furni_db?createDatabaseIfNotExist=true"
