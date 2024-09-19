@@ -111,6 +111,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                             .forEach(permission -> joiner.add(permission.getName()));
             });
         }
+
+
+
         return joiner.toString();
     }
 }
