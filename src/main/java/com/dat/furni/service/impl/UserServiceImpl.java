@@ -8,6 +8,7 @@ import com.dat.furni.exception.AppException;
 import com.dat.furni.exception.ErrorCode;
 import com.dat.furni.mapper.UserMapper;
 import com.dat.furni.model.User;
+import com.dat.furni.repository.RoleRepository;
 import com.dat.furni.repository.UserRepository;
 import com.dat.furni.service.UserService;
 import lombok.AccessLevel;
@@ -31,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
     UserRepository userRepository;
     UserMapper userMapper;
-
+    RoleRepository roleRepository;
     PasswordEncoder passwordEncoder;
 
     @Override
@@ -45,7 +46,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         HashSet<String> roles = new HashSet<>();
         roles.add(Role.USER.name());
-        user.setRoles(roles);
+        //user.setRoles(roles);
         return userMapper.toUserResponse(userRepository.save(user));
     }
 
@@ -64,7 +65,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse updateUser(UserUpdateRequest request, String userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
+
         userMapper.updateUser(user, request);
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+
+        var roles = roleRepository.findAllById(request.getRoles());
+        user.setRoles(new HashSet<>(roles));
+
         return userMapper.toUserResponse(userRepository.save(user));
     }
 
